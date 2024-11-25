@@ -9,12 +9,12 @@
 1. Запустите Docker-контейнер с тестовым изображением, используя команду:
 
     ```bash
-    docker run --rm <ваш_аккаунт>/face-detector:latest
+    docker run --rm nikinok/face-detector:latest
     ```
 
 2. Для использования вашего собственного изображения передайте путь к нему в качестве аргумента:
     ```bash
-    docker run --rm -v $(pwd):/app <ваш_аккаунт>/face-detector:latest /app/ваше_изображение.jpg
+    docker run --rm -v $(pwd):/app nikinok/face-detector:latest /app/ваше_изображение.jpg
     ```
 
 ## CI/CD
