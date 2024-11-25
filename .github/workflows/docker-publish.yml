@@ -1,0 +1,31 @@
+name: Build and Publish Docker Image
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            # Шаг 1: Клонируем репозиторий
+            - name: Check out the repository
+              uses: actions/checkout@v2
+
+            # Шаг 2: Логинимся в DockerHub
+            - name: Log in to DockerHub
+              uses: docker/login-action@v2
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            # Шаг 3: Сборка и публикация Docker-образа
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v2
+              with:
+                  context: .
+                  file: ./Dockerfile
+                  push: true
+                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/face-detector:latest
